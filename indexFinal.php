@@ -307,6 +307,17 @@
         </form>
     </div>
 
+    <div class="container">
+    <h2>See your likes</h2>
+    <form action="tabsFinal.php" method="post">
+        <div class="form-group">
+            <label for="userEmailLikes">Your Email:</label>
+            <input type="email" class="form-control" id="userEmaiLikes" name="userEmailLikes">
+        </div>
+        <button type="submit" class="btn btn-primary" name="see_likes">See Likes</button>
+    </form>
+    </div>
+
     <?php
 // Check if the form has been submitted
 if(isset($_POST['like'])) {
