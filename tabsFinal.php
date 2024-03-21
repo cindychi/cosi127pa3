@@ -207,7 +207,7 @@
             $stmt = $conn->prepare("SELECT mp.name, mp.rating, mp.production, mp.budget 
                                     FROM Likes l
                                     INNER JOIN MotionPicture mp ON l.mpid = mp.id
-                                    WHERE l.uemail = :userEmail");
+                                    WHERE l.uemail = :userEmail AND mp.id >= 200");
             // Bind parameters
             $stmt->bindParam(':userEmail', $userEmailLikes);
             // Execute the query
