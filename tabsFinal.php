@@ -42,7 +42,7 @@
                     $servername = "localhost"; // Change if your MySQL server is hosted elsewhere
                     $username = "root"; // Your MySQL username
                     $password = ""; // Your MySQL password
-                    $dbname = "cosi127_pa1_2"; // Your MySQL database name, changed from cosi127_pa1_2
+                    $dbname = "cosi127_pa1_3"; // Your MySQL database name, changed from cosi127_pa1_2
             
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -108,7 +108,7 @@
                 $servername = "localhost"; // Change if your MySQL server is hosted elsewhere
                 $username = "root"; // Your MySQL username
                 $password = ""; // Your MySQL password
-                $dbname = "cosi127_pa1_2"; // Your MySQL database name,,, changed from cosi127_pa1_2
+                $dbname = "cosi127_pa1_3"; // Your MySQL database name,,, changed from cosi127_pa1_2
 
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -145,7 +145,7 @@
                 $servername = "localhost"; // Change if your MySQL server is hosted elsewhere
                 $username = "root"; // Your MySQL username
                 $password = ""; // Your MySQL password
-                $dbname = "cosi127_pa1_2"; // Your MySQL database name,, changed from cosi127_pa1_2
+                $dbname = "cosi127_pa1_3"; // Your MySQL database name,, changed from cosi127_pa1_2
 
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -195,7 +195,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "cosi127_pa1_2";
+        $dbname = "cosi127_pa1_3";
 
         try {
             // Create connection
@@ -249,7 +249,7 @@ if(isset($_POST['like'])) {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "cosi127_pa1_2";
+    $dbname = "cosi127_pa1_3";
 
     try {
         // Create connection
