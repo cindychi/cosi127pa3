@@ -44,7 +44,44 @@
     <form action="allmoviesFinal.php" method="post">
         <input type="submit" name="v_movies" value="View All Movies">
     </form>
-</div>   
+</div> 
+
+<div class="card" style="border: 3px solid #ccc;">
+    <div class="card-body">
+        <form action="findppl.php" method="post">
+            <div class="form-group">
+                <label for="selectPField">Find Person By Criteria:</label>
+                <select class="form-control" id="selectPField" name="selectPField">
+                    <option value="">Show All People</option>
+                    <!-- <option value="id">ID</option>
+                    <option value="name">Name</option>
+                    <option value="nationality">Nationality</option>
+                    <option value="dob">Date of Birth</option>
+                    <option value="gender">Gender</option> -->
+                </select>
+            </div>
+            <div class="form-group" id="textboxDiv" style="display:none;">
+                <label for="searchTerm">Search Term:</label>
+                <input type="text" class="form-control" id="searchTerm" name="searchTerm" placeholder="Enter search term">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Find People">
+        </form>
+    </div>
+    </div>
+
+    <script>
+        // Show textbox when a field is selected
+        document.getElementById('selectPField').addEventListener('change', function() {
+            var selectField = this.value;
+            var textboxDiv = document.getElementById('textboxDiv');
+            if (selectField !== "") {
+                textboxDiv.style.display = 'block';
+            } else {
+                textboxDiv.style.display = 'none';
+            }
+        });
+    </script>
+
 
 
         <?php
@@ -128,7 +165,7 @@
 <body>
     <div class="container">
         <br>
-        <h1 style="text-align:center">COSI 127 - PA 1.2</h1><br>
+        <h1 style="text-align:center">COSI 127 - PA 1.3</h1><br>
         <h3 style="text-align:center">OUR IMDB</h3><br>
     </div>
 
