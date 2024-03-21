@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $servername = "localhost"; // Change if your MySQL server is hosted elsewhere
             $username = "root"; // Your MySQL username
             $password = ""; // Your MySQL password
-            $dbname = "cosi127_pa1_2"; // Your MySQL database name
+            $dbname = "cosi127_pa1_3"; // Your MySQL database name
     
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
