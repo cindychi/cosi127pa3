@@ -88,7 +88,7 @@
                     echo "</tbody>";
                     echo "</table>";
                 } else {
-                    echo "No data found for the selected criteria.";
+                    echo "No data found for the selected criteria. Try a different genre.";
                 }
                 // Close the database connection
                 $conn->close();
