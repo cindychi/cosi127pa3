@@ -1,9 +1,8 @@
 <html>
 <head>
-<a href="indexFinal.php" class="btn btn-primary">Home</a>
+    <a href="indexFinal.php" class="btn btn-primary">Home</a>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>IMDB Movie Database</title></br>
+    <title>IMDB Movie Database</title>
     <style>
         table {
             border-collapse: collapse;
@@ -24,16 +23,19 @@
     <h1>IMDB Movie Database</h1>
 
     <div style="display: flex;">
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <input type="submit" name="v_tables" value="View All Tables"> 
-        <input type="submit" name="v_actors" value="View All Actors">
-    </form>
-    <form action="allmoviesFinal.php" method="post">
-        <input type="submit" name="v_movies" value="View All Movies">
-    </form>
-</div>    
+        <form action="tabsFinal.php" method="post">
+            <input type="submit" name="v_tables" value="View All Tables">
+            <input type="submit" name="v_actors" value="View All Actors">
+        </form>
+        <form action="allmoviesFinal.php" method="post">
+            <input type="submit" name="v_movies" value="View All Movies">
+        </form>
+    </div>
 
-        <?php
+
+
+
+    <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_POST["v_tables"])) {
                     // MySQL database connection
@@ -96,6 +98,10 @@
                     $conn->close();
                 }
 
+
+
+
+
                 elseif (isset($_POST["v_movies"])) {
                 // Code to display all movies
                 // MySQL database connection
@@ -132,6 +138,7 @@
                 }
                 $conn->close();
 
+                
             } elseif (isset($_POST["v_actors"])) {
                 // Code to display all actors
                 // MySQL database connection
@@ -149,7 +156,10 @@
                 }
 
                 // Query to fetch all actors
-                $sql = "SELECT name, nationality, dob, gender FROM People";
+                $sql = "SELECT DISTINCT People.name, People.nationality, People.dob, People.gender 
+                        FROM People 
+                        JOIN Role ON People.id = Role.pid 
+                        WHERE Role.role_name = 'Actor'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -167,18 +177,67 @@
                     }
                     $conn->close();
                 }
-            }   
+            }  
+            
+
         ?>
+
+
+
+
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['see_likes'])) {
+        // Retrieve form data
+        $userEmailLikes = $_POST['userEmailLikes'];
+
+        // Database connection details
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "cosi127_pa1_2";
+
+        try {
+            // Create connection
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // Set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Prepare SQL statement to fetch liked movies for the given email
+            $stmt = $conn->prepare("SELECT mp.name, mp.rating, mp.production, mp.budget 
+                                    FROM Likes l
+                                    INNER JOIN MotionPicture mp ON l.mpid = mp.id
+                                    WHERE l.uemail = :userEmail");
+            // Bind parameters
+            $stmt->bindParam(':userEmail', $userEmailLikes);
+            // Execute the query
+            $stmt->execute();
+            $likedMovies = $stmt->fetchAll();
+
+            if (count($likedMovies) > 0) {
+                // Output the table of liked movies
+                echo "<h2>Movies Liked by $userEmailLikes</h2>";
+                echo "<table class='table table-bordered'>";
+                echo "<tr><th>Name</th><th>Rating</th><th>Production</th><th>Budget</th></tr>";
+                foreach ($likedMovies as $movie) {
+                    echo "<tr><td>{$movie['name']}</td><td>{$movie['rating']}</td><td>{$movie['production']}</td><td>{$movie['budget']}</td></tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "No liked movies found for $userEmailLikes";
+            }
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        // Close the database connection
+        $conn = null;
+    }
+    ?>
 </body>
 
 
-
-
-
 <body>
-
-
-
     <?php
 // Check if the form has been submitted
 if(isset($_POST['like'])) {
@@ -216,4 +275,10 @@ if(isset($_POST['like'])) {
 }
 ?>
 </body>
+
+
+
+
+
+
 </html>
